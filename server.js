@@ -7,15 +7,15 @@ const mount = require('koa-mount');
 const route = require('koa-route');
 
 const app = koa();
+const isProduction = process.env.NODE_ENV === 'production';
 
-app.use(logger());
-app.use(mount('/assets', staticDir(path.join(__dirname, 'build'))));
-app.use(route.get('/favicon.ico', function *() {
-  this.status = 200;
-}));
+if (!isProduction) {
+  app.use(logger());
+  app.use(mount('/assets', staticDir(path.resolve('build'))));
+}
 
 app.use(route.get('*', function *() {
-  yield send(this, 'public/index.html');
+  yield send(this, 'build/public/index.html');
 }));
 
 module.exports = app;

@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const Cmt2emtPlugin = require('cmt2emt-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -22,6 +23,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'build'),
+    publicPath: '/assets',
     filename: '[name].js',
   },
   module: {
@@ -42,6 +44,14 @@ module.exports = {
         test: /\.css$/,
         loader: 'style!css!autoprefixer'
       },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url',
+        query: {
+          limit: 10000,
+          name: '/images/[hash].[ext]'
+        }
+      }
     ]
   },
   plugins: [
@@ -54,7 +64,12 @@ module.exports = {
       minChunk: Infinity,
       filename: 'vendor.js',
     }),
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new Cmt2emtPlugin({
+      source: path.resolve('public/index.html'),
+      output: './public/index.html',
+      transform: assetName => `/assets/${assetName}`
+    })
   ]
 };
 
