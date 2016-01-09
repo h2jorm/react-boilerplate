@@ -17,7 +17,7 @@ module.exports = {
       'lodash',
       'moment',
       'classnames',
-      'whatwg-fetch',
+      'isomorphic-fetch',
     ],
     app: './src/index.js',
   },
@@ -56,8 +56,8 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
       moment: 'moment',
+      lodash: '_',
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
