@@ -14,6 +14,7 @@ module.exports = {
       'redux',
       'redux-thunk',
       'redux-logger',
+      'redux-lego',
       'lodash',
       'moment',
       'classnames',
@@ -31,8 +32,9 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel',
-        exclude: /node_modules/,
+        include: /src|redux-combine/,
         query: {
+          plugins: ['transform-runtime'],
           presets: ['react', 'es2015', 'stage-0'],
         }
       },

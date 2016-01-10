@@ -21,6 +21,13 @@ app.use(route.get('/backend/todos/1234', function *() {
   };
 }));
 
+app.use(route.get('/backend/todos', function *() {
+  this.body = [
+    {id: '1', title: 'hello', content: 'world'},
+    {id: '2', title: 'good', content: 'days'},
+  ];
+}));
+
 app.use(route.get('*', function *() {
   yield send(this, 'build/public/index.html');
 }));

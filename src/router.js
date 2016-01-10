@@ -11,7 +11,7 @@ export default class Root extends React.Component {
   render() {
     return (
       <Router history={browserHistory}>
-        <Route path="/" component={Page.Hello}></Route>
+        <Route path="/" component={Page.Todos}></Route>
       </Router>
     );
   }
