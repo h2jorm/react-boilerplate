@@ -14,6 +14,13 @@ if (!isProduction) {
   app.use(mount('/assets', staticDir(path.resolve('build'))));
 }
 
+app.use(route.get('/backend/todos/1234', function *() {
+  this.body = {
+    title: 'hello',
+    content: 'world',
+  };
+}));
+
 app.use(route.get('*', function *() {
   yield send(this, 'build/public/index.html');
 }));

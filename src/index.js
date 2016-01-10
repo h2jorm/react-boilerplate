@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Root from './router';
 
 ReactDOM.render(
-  <p>hello world</p>,
+  <Root />,
   document.querySelector('#root')
 );
